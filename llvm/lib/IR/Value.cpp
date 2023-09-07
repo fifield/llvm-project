@@ -45,8 +45,8 @@ static cl::opt<unsigned> UseDerefAtPointSemantics(
 //===----------------------------------------------------------------------===//
 static inline Type *checkType(Type *Ty) {
   assert(Ty && "Value defined with a null type: Error!");
-  assert(!isa<TypedPointerType>(Ty->getScalarType()) &&
-         "Cannot have values with typed pointer types");
+//  assert(!isa<TypedPointerType>(Ty->getScalarType()) &&
+//         "Cannot have values with typed pointer types");
   return Ty;
 }
 

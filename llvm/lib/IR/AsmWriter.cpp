@@ -628,8 +628,7 @@ void TypePrinting::print(Type *Ty, raw_ostream &OS) {
   }
   case Type::TypedPointerTyID: {
     TypedPointerType *TPTy = cast<TypedPointerType>(Ty);
-    OS << "typedptr(" << *TPTy->getElementType() << ", "
-       << TPTy->getAddressSpace() << ")";
+    OS << *TPTy->getElementType() << "*";
     return;
   }
   case Type::TargetExtTyID:

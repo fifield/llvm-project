@@ -806,7 +806,8 @@ void AsyncToAsyncRuntimePass::runOnOperation() {
     return !walkResult.wasInterrupted();
   });
   runtimeTarget.addLegalOp<cf::AssertOp, arith::XOrIOp, arith::ConstantOp,
-                           func::ConstantOp, cf::BranchOp, cf::CondBranchOp>();
+                           func::ConstantOp, cf::BranchOp, cf::CondBranchOp,
+                           arith::AddIOp, arith::CmpIOp>();
 
   // Assertions must be converted to runtime errors inside async functions.
   runtimeTarget.addDynamicallyLegalOp<cf::AssertOp>(

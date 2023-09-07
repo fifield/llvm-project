@@ -14,6 +14,7 @@
 #include "llvm/ADT/TypeSwitch.h"
 #include "llvm/IR/DataLayout.h"
 #include "llvm/IR/DerivedTypes.h"
+#include "llvm/IR/TypedPointerType.h"
 #include "llvm/IR/Type.h"
 
 using namespace mlir;
@@ -106,7 +107,10 @@ private:
 
   /// Translates the given pointer type.
   llvm::Type *translate(LLVM::LLVMPointerType type) {
-    return llvm::PointerType::get(context, type.getAddressSpace());
+    if (type.isOpaque())
+      return llvm::PointerType::get(context, type.getAddressSpace());
+    return llvm::PointerType::get(translateType(type.getElementType()),
+                                  type.getAddressSpace());
   }
 
   /// Translates the given structure type, supports both identified and literal
